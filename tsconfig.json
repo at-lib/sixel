@@ -1,0 +1,9 @@
+{
+	"compilerOptions": {
+		"esModuleInterop": true,
+		"strict": true
+	},
+	"files": [
+		"sixel.test.ts"
+	]
+}

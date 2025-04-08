@@ -1,0 +1,22 @@
+{
+  "name": "@lib/sixel",
+  "version": "1.0.0",
+  "description": "Fast sixel encoder for indexed color bitmap terminal graphics",
+  "license": "0BSD",
+  "author": "Juha Järvi",
+  "homepage": "https://github.com/at-lib/sixel/#readme",
+  "bugs": {
+    "url": "https://github.com/at-lib/sixel/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/at-lib/sixel.git"
+  },
+  "scripts": {
+    "test": "run sixel.test"
+  },
+  "devDependencies": {
+    "@lib/run": "^1.0.2",
+    "@types/node": "^22.14.0"
+  }
+}
