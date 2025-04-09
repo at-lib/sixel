@@ -1,5 +1,7 @@
 # `@lib/sixel`
 
+[![npm version](https://badgen.net/npm/v/@lib/sixel)](https://www.npmjs.com/package/@lib/sixel)
+
 Draw indexed color bitmap graphics on terminals supporting sixel graphics.
 
 Install:
@@ -11,17 +13,16 @@ npm install --save @lib/sixel
 Now create a file `mandelbrot.ts`:
 
 ```TypeScript
-import { encodeSixelImage } from './sixel';
+import { encodeSixelImage } from '@lib/sixel';
 
 const size = 257;
 const image = new Uint8Array(size * size);
+const step = 4 / (size - 1);
 let pos = 0;
 
-for(let b = 2; b >= -2; b -= 4 / (size - 1)) {
-    for(let a = -2; a <= 2; a += 4 / (size - 1)) {
-        let p = 0;
-        let q = 0;
-        let i = 0;
+for(let b = 2; b >= -2; b -= step) {
+    for(let a = -2; a <= 2; a += step) {
+        let p = 0, q = 0, i = 0;
 
         while(i++ < 16 && p * p + q * q < 4) {
             const t = p * p - q * q + a;
@@ -55,7 +56,7 @@ Run it:
 npx @lib/run mandelbrot
 ```
 
-It should print (literally this image in the terminal window):
+It should print (literally this image is drawn in the terminal window):
 
 ![Fractal](doc/mandelbrot.png)
 
