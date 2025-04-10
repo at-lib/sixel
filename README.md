@@ -4,13 +4,27 @@
 
 Draw indexed color bitmap graphics on terminals supporting sixel graphics.
 
+![Screenshot](doc/terminal.svg)
+
 Install:
 
 ```bash
 npm install --save @lib/sixel
 ```
 
-Now create a file `mandelbrot.ts`:
+## API
+
+***ƒ*** `encodeSixelImage(config: SixelImageConfig): void`
+
+Encode an indexed 256-color image stored as one-byte pixels,
+into a string of DEC terminal control codes to render it using sixels.
+
+- `config` Configuration object.
+- Returns: String of DEC terminal control codes.
+
+## Example
+
+Create a file `mandelbrot.ts`:
 
 ```TypeScript
 import { encodeSixelImage } from '@lib/sixel';
@@ -56,9 +70,7 @@ Run it:
 npx @lib/run mandelbrot
 ```
 
-It should print (literally this image is drawn in the terminal window):
-
-![Fractal](doc/mandelbrot.png)
+It should literally output a fractal image like at the top of this readme.
 
 # License
 

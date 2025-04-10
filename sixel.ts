@@ -499,7 +499,7 @@ export interface SixelImageConfig {
   *
   * @param config Configuration object.
   *
-  * @return DEC terminal control codes. */
+  * @return String of DEC terminal control codes. */
 
 export function encodeSixelImage(config: SixelImageConfig): void {
 	// Enforce sensible limits.
