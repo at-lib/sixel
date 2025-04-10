@@ -21,7 +21,7 @@ into a string of DEC terminal control codes to render it using sixels.
 
 - `config` Configuration object.
 
-***Ⓘ*** `SixelImageConfig`
+**Ⓘ** `SixelImageConfig`
 
 Configuration for generating a Sixel image.
 
@@ -29,12 +29,12 @@ Configuration for generating a Sixel image.
 - `width` Image width in pixels, unsigned 16-bit integer.
 - `height` Image height in pixels, unsigned 16-bit integer.
 - `palette` RGB values 0-1 for every palette index used in image data.
-- `transparentIndex` Palette index of transparent color. Use -1 for no transparency.
 - `write` Callback to write a chunk of output bytes.
   It should make a copy as needed, the same chunk buffer is re-used between calls.
+- *`transparentIndex`* Palette index of transparent color (default: no transparency).
 - *`stride`* Distance in memory between vertically adjacent pixels
-  (default is image width in pixels).
-- *`offset`* Byte offset to start of image data (default 0).
+  (default: image width in pixels).
+- *`offset`* Byte offset to start of image data (default: 0).
 
 ## Example
 
@@ -67,7 +67,6 @@ encodeSixelImage({
     width: size,
     height: size,
     palette: [[0, 0, 0], [1, 1, 1]],
-    transparentIndex: -1,
     write(chunk: Uint8Array) { process.stdout.write(chunk); }
 });
 

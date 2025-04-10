@@ -481,18 +481,18 @@ export interface SixelImageConfig {
 	/* RGB values 0-1 for every palette index used in image data. */
 	palette: [number, number, number][];
 
-	/* Palette index of transparent color. Use -1 for no transparency. */
-	transparentIndex: number;
-
 	/** Callback to write a chunk of output bytes.
 	  * It should make a copy as needed, the same chunk buffer is re-used between calls. */
 	write: (chunk: Uint8Array) => void;
 
+	/* Palette index of transparent color (default: no transparency). */
+	transparentIndex?: number;
+
 	/** Distance in memory between vertically adjacent pixels
-	  * (default is image width in pixels). */
+	  * (default: image width in pixels). */
 	stride?: number;
 
-	/* Byte offset to start of image data (default 0). */
+	/* Byte offset to start of image data (default: 0). */
 	offset?: number;
 }
 
@@ -505,11 +505,13 @@ export function encodeSixelImage(config: SixelImageConfig): void {
 	// Enforce sensible limits.
 	const width = (config.width & 0xffff) || 1;
 	const height = (config.height & 0xffff) || 1;
-	const transparentIndex = config.transparentIndex < 0 ? -1 : (config.transparentIndex & 0xff) || 0;
 	const image = config.image;
 	const write = config.write;
 	const stride = config.stride || width;
+	let transparentIndex = config.transparentIndex;
 	let offset = config.offset || 0;
+
+	transparentIndex = transparentIndex === 0 || transparentIndex > 0 ? transparentIndex & 0xff : -1;
 
 	encodeSixelHeader(width, height, config.palette, write);
 
