@@ -466,14 +466,16 @@ export function encodeSixelHeader(
 	write(buffer.slice(0, pos));
 }
 
+/** Configuration for generating a Sixel image. */
+
 export interface SixelImageConfig {
 	/** Contiguous image buffer, one byte per pixel. */
 	image: Uint8Array;
 
-	/** Image width in pixels. Unsigned 16-bit integer. */
+	/** Image width in pixels, unsigned 16-bit integer. */
 	width: number;
 
-	/** Image height in pixels. Unsigned 16-bit integer. */
+	/** Image height in pixels, unsigned 16-bit integer. */
 	height: number;
 
 	/* RGB values 0-1 for every palette index used in image data. */
@@ -497,9 +499,7 @@ export interface SixelImageConfig {
 /** Encode an indexed 256-color image stored as one-byte pixels,
   * into a string of DEC terminal control codes to render it using sixels.
   *
-  * @param config Configuration object.
-  *
-  * @return String of DEC terminal control codes. */
+  * @param config Configuration object. */
 
 export function encodeSixelImage(config: SixelImageConfig): void {
 	// Enforce sensible limits.

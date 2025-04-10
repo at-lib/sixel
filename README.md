@@ -2,7 +2,7 @@
 
 [![npm version](https://badgen.net/npm/v/@lib/sixel)](https://www.npmjs.com/package/@lib/sixel)
 
-Draw indexed color bitmap graphics on terminals supporting sixel graphics.
+Draw indexed color bitmap graphics on terminals [supporting](https://www.arewesixelyet.com/) sixel graphics, without dependencies.
 
 ![Screenshot](doc/terminal.svg)
 
@@ -20,7 +20,21 @@ Encode an indexed 256-color image stored as one-byte pixels,
 into a string of DEC terminal control codes to render it using sixels.
 
 - `config` Configuration object.
-- Returns: String of DEC terminal control codes.
+
+***Ⓘ*** `SixelImageConfig`
+
+Configuration for generating a Sixel image.
+
+- `image` Contiguous image buffer, one byte per pixel.
+- `width` Image width in pixels, unsigned 16-bit integer.
+- `height` Image height in pixels, unsigned 16-bit integer.
+- `palette` RGB values 0-1 for every palette index used in image data.
+- `transparentIndex` Palette index of transparent color. Use -1 for no transparency.
+- `write` Callback to write a chunk of output bytes.
+  It should make a copy as needed, the same chunk buffer is re-used between calls.
+- *`stride`* Distance in memory between vertically adjacent pixels
+  (default is image width in pixels).
+- *`offset`* Byte offset to start of image data (default 0).
 
 ## Example
 
@@ -71,6 +85,12 @@ npx @lib/run mandelbrot
 ```
 
 It should literally output a fractal image like at the top of this readme.
+
+## More information
+
+- [Sixel](https://en.wikipedia.org/wiki/Sixel) on Wikipedia.
+- [Are We Sixel Yet?](https://www.arewesixelyet.com/) - Supported and unsupported terminals.
+- [chafa](https://hpjansson.org/chafa/) - Terminal graphics library and tooling (sixel and other alternatives).
 
 # License
 
