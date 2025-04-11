@@ -511,7 +511,7 @@ export function encodeSixelImage(config: SixelImageConfig): void {
 	let transparentIndex = config.transparentIndex;
 	let offset = config.offset || 0;
 
-	transparentIndex = transparentIndex === 0 || transparentIndex > 0 ? transparentIndex & 0xff : -1;
+	transparentIndex = transparentIndex === 0 || (transparentIndex && transparentIndex > 0) ? transparentIndex & 0xff : -1;
 
 	encodeSixelHeader(width, height, config.palette, write);
 
