@@ -89,8 +89,13 @@ It should literally output a fractal image like at the top of this readme.
 
 Sixel graphics is based on encoding images as bands 6 pixels tall. A band uses one bit per pixel to distinguish covered versus transparent.
 It's possible to switch colors between columns, but not individual pixels. A workaround is to print several overlapping bands leaving holes for different colors.
+
 This algorithm keeps redrawing a band until all colors are rendered.
 It will also switch colors in the middle of a band, if the current color is not re-used within the next 7 columns.
+
+Sixel also supports RLE compression, repeating the same hole pattern for multiple columns.
+This algorithm tries to take maximum advantage even if it means drawing extra pixels, before they have the correct color.
+
 Extreme SIMD-style branchless bit twiddling hacks are used for speed, with clarifying code comments.
 
 ## More information
