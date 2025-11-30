@@ -1,6 +1,6 @@
 {
   "name": "@lib/sixel",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Fast sixel encoder for indexed color bitmap terminal graphics",
   "license": "0BSD",
   "author": "Juha Järvi",
