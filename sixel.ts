@@ -163,7 +163,8 @@ function encodeSixelPass(outPos: number, x: number, width: number, state: PassSt
 		// If there's pixels left to draw for this sixel,
 		// but nothing in this color for this or a few future sixels,
 		// then switch pen to color of topmost pixel still pending.
-		if(pending && !state.gotPen) {
+
+		if(pending && (!state.gotPen || !((aheadLo | aheadHi) & LOOKAHEAD_BITS))) {
 			state.gotPen = true;
 			// Emit any sixels using previous color.
 			outPos = encodeSixelRun(lastSixel, runLength, passBuffer, outPos);
@@ -182,14 +183,14 @@ function encodeSixelPass(outPos: number, x: number, width: number, state: PassSt
 
 			// Extract palette index from input byte matching the possible mask for top 4 pixels.
 			// Divide to right-shift the byte with MSB set, making it the least significant byte.
-			penColor = lo / ((mask >>> 7) || 0xffffffff) & 255;
+			penColor = lo / ((mask >>> 7) || 0x100000000) & 255;
 
 			// If no pixel was missing among top 4, test the bottom 2 pixels.
 			mask = maskHi & -!mask;
 			mask = mask & -mask;
 
 			// Extract palette index from bottom 2 pixels if the mask matches now.
-			penColor += hi / ((mask >>> 7) || 0xffffffff) & 255;
+			penColor += hi / ((mask >>> 7) || 0x100000000) & 255;
 
 			// Emit color change command.
 			passBuffer[outPos++] = 0x23;
